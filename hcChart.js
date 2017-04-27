@@ -1,7 +1,7 @@
  // Directive for generic chart, pass in chart options
  "use strict";
 
-var hcChart = function () {
+var hcChart = function (Highcharts) {
                 return {
                     restrict: 'E',
                     template: '<div></div>',
