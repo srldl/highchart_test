@@ -11,4 +11,5 @@ var app = angular.module('element_test', []).value('Highcharts', Highcharts);
 
 app.directive('hcChart', require('./hcChart'));
 app.directive('hcPieChart', require('./hcPieChart'));
+app.directive('hcBarChart', require('./hcBarChart'));
 app.controller('myController', require('./myController'));

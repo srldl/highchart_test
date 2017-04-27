@@ -1,4 +1,60 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+"use strict";
+
+var hcBarChart = function (Highcharts) {
+ // Directive for pie charts, pass in title and data only
+                return {
+                    restrict: 'E',
+                    template: '<div></div>',
+                    scope: {
+                        title: '@',
+                        data: '='
+                    },
+                    link: function (scope, element) {
+                        Highcharts.chart(element[0], {
+ chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Browser market shares. January, 2015 to May, 2015'
+    },
+    subtitle: {
+        text: 'Click the columns to view versions. Source: <a href="http://netmarketshare.com">netmarketshare.com</a>.'
+    },
+    xAxis: {
+        type: 'category'
+    },
+    yAxis: {
+        title: {
+            text: 'Total percent market share'
+        }
+    },
+    legend: {
+        enabled: false
+    },
+    plotOptions: {
+        series: {
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                format: '{point.y:.1f}%'
+            }
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+    },
+ series: [{
+                                data: scope.data
+                            }]
+                        });
+                    }
+                };
+};
+
+module.exports = hcBarChart;
+},{}],2:[function(require,module,exports){
  // Directive for generic chart, pass in chart options
  "use strict";
 
@@ -16,7 +72,7 @@ var hcChart = function (Highcharts) {
             };
 
 module.exports = hcChart;
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 "use strict";
 
 var hcPieChart = function (Highcharts) {
@@ -55,7 +111,7 @@ var hcPieChart = function (Highcharts) {
 };
 
 module.exports = hcPieChart;
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 'use strict';
 
 // @ngInject
@@ -69,9 +125,10 @@ var app = angular.module('element_test', []).value('Highcharts', Highcharts);
 
 app.directive('hcChart', require('./hcChart'));
 app.directive('hcPieChart', require('./hcPieChart'));
+app.directive('hcBarChart', require('./hcBarChart'));
 app.controller('myController', require('./myController'));
 
-},{"./hcChart":1,"./hcPieChart":2,"./myController":4,"angular":6,"highcharts":7,"highcharts/modules/exporting":8}],4:[function(require,module,exports){
+},{"./hcBarChart":1,"./hcChart":2,"./hcPieChart":3,"./myController":5,"angular":7,"highcharts":8,"highcharts/modules/exporting":9}],5:[function(require,module,exports){
  "use strict";
 
  var myController = function ($scope, $controller) {
@@ -90,6 +147,28 @@ app.controller('myController', require('./myController'));
                         data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
                     }]
                 };
+
+
+                $scope.barData =
+              [{
+                name: 'Microsoft Internet Explorer',
+                y: 56.33
+            }, {
+                name: 'Chrome',
+                y: 24.03
+            }, {
+                name: 'Firefox',
+                y: 10.38
+            }, {
+                name: 'Safari',
+                y: 4.77
+            }, {
+                name: 'Opera',
+                y: 0.91
+            }, {
+                name: 'Proprietary or Undetectable',
+                y: 0.2
+            }];
 
                 // Sample data for pie chart
                 $scope.pieData = [{
@@ -113,10 +192,12 @@ app.controller('myController', require('./myController'));
                         name: "Proprietary or Undetectable",
                         y: 0.2
                 }]
+
+
 };
 
  module.exports = myController;
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.0
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -30545,11 +30626,11 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":5}],7:[function(require,module,exports){
+},{"./angular":6}],8:[function(require,module,exports){
 /*
  Highcharts JS v5.0.10 (2017-03-31)
 
@@ -30944,7 +31025,7 @@ a?!this.selected:a;this.checkbox&&(this.checkbox.checked=a);k(this,a?"select":"u
 c}).chartOptions})),l=l.toString()||void 0;l!==(d&&d.ruleIds)&&(d&&this.update(d.undoOptions,f),l?(this.currentResponsive={ruleIds:l,mergedOptions:c,undoOptions:this.currentOptions(c)},this.update(c,f)):this.currentResponsive=void 0)};B.prototype.matchResponsiveRule=function(a,k){var l=a.condition;(l.callback||function(){return this.chartWidth<=f(l.maxWidth,Number.MAX_VALUE)&&this.chartHeight<=f(l.maxHeight,Number.MAX_VALUE)&&this.chartWidth>=f(l.minWidth,0)&&this.chartHeight>=f(l.minHeight,0)}).call(this)&&
 k.push(a._id)};B.prototype.currentOptions=function(a){function f(a,c,k,q){var b,d;for(b in a)if(!q&&-1<H(b,["series","xAxis","yAxis"]))for(a[b]=l(a[b]),k[b]=[],d=0;d<a[b].length;d++)c[b][d]&&(k[b][d]={},f(a[b][d],c[b][d],k[b][d],q+1));else r(a[b])?(k[b]=G(a[b])?[]:{},f(a[b],c[b]||{},k[b],q+1)):k[b]=c[b]||null}var q={};f(a,this.options,q,0);return q}})(L);return L});
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /*
  Highcharts JS v5.0.10 (2017-03-31)
  Exporting module
@@ -30973,4 +31054,4 @@ c=b.exportEvents,f;a&&(h(a,function(a,c){a&&(a.onclick=a.ontouchstart=null,f="ca
 function(){var a,b=this.options.exporting,e=b.buttons,c=this.isDirtyExporting||!this.exportSVGElements;this.buttonOffset=0;this.isDirtyExporting&&this.destroyExport();if(c&&!1!==b.enabled){this.exportEvents=[];for(a in e)this.addButton(e[a]);this.isDirtyExporting=!1}w(this,"destroy",this.destroyExport)};A.prototype.callbacks.push(function(a){a.renderExporting();w(a,"redraw",a.renderExporting);h(["exporting","navigation"],function(b){a[b]={update:function(e,c){a.isDirtyExporting=!0;p(!0,a.options[b],
 e);C(c,!0)&&a.redraw()}}})})})(k)});
 
-},{}]},{},[3]);
+},{}]},{},[4]);
