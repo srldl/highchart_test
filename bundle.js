@@ -151,46 +151,31 @@ app.controller('myController', require('./myController'));
 
                 $scope.barData =
               [{
-                name: 'Microsoft Internet Explorer',
+                name: 'research',
                 y: 56.33
             }, {
-                name: 'Chrome',
+                name: 'topographical mapping',
                 y: 24.03
             }, {
-                name: 'Firefox',
+                name: 'outreach VIP',
                 y: 10.38
             }, {
-                name: 'Safari',
+                name: 'logistic operations',
                 y: 4.77
             }, {
-                name: 'Opera',
+                name: 'other',
                 y: 0.91
-            }, {
-                name: 'Proprietary or Undetectable',
-                y: 0.2
             }];
 
                 // Sample data for pie chart
                 $scope.pieData = [{
-                        name: "Microsoft Internet Explorer",
+                        name: "Fieldwork",
                         y: 56.33
                     }, {
-                        name: "Chrome",
+                        name: "Cruise",
                         y: 24.03,
                         sliced: true,
                         selected: true
-                    }, {
-                        name: "Firefox",
-                        y: 10.38
-                    }, {
-                        name: "Safari",
-                        y: 4.77
-                    }, {
-                        name: "Opera",
-                        y: 0.91
-                    }, {
-                        name: "Proprietary or Undetectable",
-                        y: 0.2
                 }]
 
 
