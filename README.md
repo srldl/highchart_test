@@ -1,2 +1,1 @@
-# highchart_test
-testing highcharts with angular
+Play with insert and delete elements in DOM model with angular
