@@ -10,6 +10,16 @@
 </head>
 <body ng-controller="myController">
 
+<form novalidate>
+    Start date:<br>
+    <input type="text" ng-model="unit.start_date"><br>
+    End date:<br>
+    <input type="text" ng-model="unit.end_date">
+    <br><br>
+    <button ng-click="submit()">Submit</button>
+</form>
+
+
      <hc-chart options="chartOptions">Placeholder for generic chart</hc-chart>
      <hc-pie-chart title="Browser usage" data="pieData">Placeholder for pie chart</hc-pie-chart>
      <hc-bar-chart title="Browser usage" data="barData">Placeholder for bar data</hc-bar-chart>
